@@ -1,0 +1,3 @@
+/////////////////////////////// COPY PASTE DES EXOS MONGOOSE ///////////////////////////////
+
+const User = require("../model/user");

@@ -23,6 +23,15 @@ app.use(express.urlencoded({
 app.use(express.json());
 app.use(methodOverride("_method"));
 
+app.set("views", path.join(__dirname, "views"));
+app.set(express.static("public"));
+app.set("view engine", "ejs");
+
+app.use(userRoutes);
+
+///////////////////////////////////////////////////////////////////////////////////
+
+
 /////////////////////////////// SESSIONS ET COOKIES ///////////////////////////////
 
 const expressSession = require("express-session");
@@ -33,7 +42,7 @@ app.use(cookieParser("my_secret_code"));
 app.use(expressSession({
     secret: "my_secret_code",
     cookie: {
-        maxAge: 0
+        maxAge: 0 //serait donc infini
     },
     saveUninitialized: false,
     resave: false
@@ -46,14 +55,6 @@ app.use((req, res, next) => {
 });
 
 ///////////////////////////////////////////////////////////////////////////////////
-
-
-app.set("views", path.join(__dirname, "views"));
-
-app.set(express.static("public"));
-app.set("view engine", "ejs");
-
-app.use(userRoutes);
 
 const port = process.env.PORT;
 app.listen(port, () => {

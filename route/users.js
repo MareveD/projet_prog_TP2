@@ -9,3 +9,5 @@ const homeController = require("./homeController")
 router.get("/", homeController.getIndex);
 
 module.exports = router;
+
+///////////////////////////////////////////////////////////////////////////////////////////

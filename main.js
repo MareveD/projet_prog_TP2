@@ -8,6 +8,7 @@ const methodOverride = require("method-override");
 const path = require("path");
 const userRoutes = require("./route/users");
 
+
 dotenv.config({
     path: "./config.env"
 });
@@ -29,6 +30,10 @@ app.set("view engine", "ejs");
 
 app.use(userRoutes);
 
+app.use(  "/css",  express.static(path.join(__dirname, "node_modules/bootstrap/dist/css")))
+app.use(  "/js",  express.static(path.join(__dirname, "node_modules/bootstrap/dist/js")))
+app.use("/js", express.static(path.join(__dirname, "node_modules/jquery/dist")))
+app.get("/", (req, res) => {  res.sendFile(path.join(__dirname, "views/index.ejs"))})
 ///////////////////////////////////////////////////////////////////////////////////
 
 

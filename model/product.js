@@ -3,13 +3,13 @@
 const mongoose = require ("mongoose");
 
 //Schema
-const userSchema = mongoose.Schema({
+const productSchema = mongoose.Schema({
     code : String,
     description : String,
-    price : Number,
+    prix : Number,
 }
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Product", productSchema);
 
 ///////////////////////////////////////////////////////////////////////////////////////////

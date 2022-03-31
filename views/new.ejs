@@ -1,0 +1,16 @@
+<%- include("partials/header") -%>
+
+<main>
+<div class="container">
+    <h2>Add New Product</h2>
+    <form action="/product/new" method="post" class="p-2 m-2">
+        <input class="form-control m-2" type="text" id="code" name="code" placeholder="Code produit" aria-label="default input example">
+        <input class="form-control m-2" type="text" id="description" name="description" placeholder="Description du produit" aria-label="default input example">
+        <input class="form-control m-2" type="number" id="prix" name="prix" placeholder="Prix du produit" aria-label="default input example">
+        <button class="btn btn-primary m-2" type="submit">Ajouter à la base de données</button>
+    </form>
+</div>
+</main>
+
+</body>
+</html>

@@ -49,11 +49,11 @@ exports.saveProduct = (req, res) => {
     });
     newProduct.save()
         .then(response => {
-            req.flash("success_msg", "Product is added to my db");
+            req.flash("success_msg", "Product is added to the database !");
             res.redirect("/")
         })
         .catch(error => {
-            req.flash("error_msg", "Failed to add your product to my db")
+            req.flash("error_msg", "Failed to add your product to the database. Please try again !")
             console.log(error)
         });
 }
@@ -100,9 +100,11 @@ exports.update = (req, rep) => {
                 prix: req.body.prix
             }
         }).then((product) => {
+            req.flash("success_msg", "Product is updated from the database !");
             rep.redirect("/");
         })
         .catch(error => {
+            req.flash("error_msg", "Failed to update your product from the database. Please try again !")
             rep.redirect("/");
         });
 }
@@ -116,8 +118,10 @@ exports.delete = (req, rep) => {
         _id: req.params.id
     };
     Product.deleteOne(searchQuery).then(() => {
+        req.flash("success_msg", "Product is deleted from the database !");
         rep.redirect("/");
     }).catch(error => {
+        req.flash("error_msg", "Failed to delete your product to the database. Please try again !")
         rep.redirect("/");
     });
 }

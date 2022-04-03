@@ -49,7 +49,7 @@ exports.saveProduct = (req, res) => {
     });
     newProduct.save()
         .then(response => {
-            req.flash("success_msg", "Product is added to the database !");
+            req.flash("success_msg", "Product data added to database successfully !");
             res.redirect("/")
         })
         .catch(error => {
@@ -100,7 +100,7 @@ exports.update = (req, rep) => {
                 prix: req.body.prix
             }
         }).then((product) => {
-            req.flash("success_msg", "Product is updated from the database !");
+            req.flash("success_msg", "Product data updated successfully !");
             rep.redirect("/");
         })
         .catch(error => {
@@ -118,7 +118,7 @@ exports.delete = (req, rep) => {
         _id: req.params.id
     };
     Product.deleteOne(searchQuery).then(() => {
-        req.flash("success_msg", "Product is deleted from the database !");
+        req.flash("success_msg", "Product deleted successfully !");
         rep.redirect("/");
     }).catch(error => {
         req.flash("error_msg", "Failed to delete your product to the database. Please try again !")

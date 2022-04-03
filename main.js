@@ -1,5 +1,3 @@
-/////////////////////////////// COPY PASTE DES EXOS MONGOOSE ///////////////////////////////
-
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -27,13 +25,11 @@ app.use(express.urlencoded({
 app.use(express.json());
 app.use(methodOverride("_method"));
 
-/////////////////////////////// SESSIONS ET COOKIES ///////////////////////////////
-
 app.use(cookieParser("my_secret_code"));
 app.use(expressSession({
     secret: "my_secret_code",
     cookie: {
-        maxAge: 40000 //serait donc infini
+        maxAge: 40000
     },
     saveUninitialized: false,
     resave: false
@@ -46,21 +42,15 @@ app.use((req, res, next) => {
 });
 
 app.set("views", path.join(__dirname, "views"));
-app.use(express.static(path.resolve(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 
 app.use(userRoutes);
 
-app.use(  "/css",  express.static(path.join(__dirname, "node_modules/bootstrap/dist/css")))
-app.use(  "/js",  express.static(path.join(__dirname, "node_modules/bootstrap/dist/js")))
-app.use("/js", express.static(path.join(__dirname, "node_modules/jquery/dist")))
-app.get("/", (req, res) => {  res.sendFile(path.join(__dirname, "views/index.ejs"))})
-///////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////
+//app.use("/css", express.static(path.resolve(__dirname, "node_modules/bootstrap/dist/css")));
+//app.use("/js", express.static(path.resolve(__dirname, "node_modules/bootstrap/dist/js")));
+//app.use("/js", express.static(path.resolve(__dirname, "node_modules/jquery/dist")));
+app.get("/", (req, res) => {res.sendFile(path.resolve(__dirname, "views/index.ejs"))});
 
 const port = process.env.PORT;
 app.listen(port, () => {

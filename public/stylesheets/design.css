@@ -1,25 +1,51 @@
 .form-control {
-	margin-top: 1.2rem;
+  margin-top: 1.2rem;
 }
+
 a {
-	text-decoration: none !important;
-  }
-  
-  nav {
-	background-color: #59359a !important;
-  }
-  
-  nav ul li a {
-	color: #fff;
-	transition: font-weight 0.2s;
-	margin: 15px;
-  }
-  
-  nav ul li a:hover {
-	font-weight: bold;
-	color: #fff;
-  }
-  
-  table {
-	margin-top: 50px;
-  }
+  text-decoration: none !important;
+}
+
+.navbar-brand {
+  color: #fff;
+  transition: font-weight 0.2s;
+  margin: 15px;
+}
+
+.navbar-brand:hover {
+  font-weight: bold;
+  color: #C8A2C8;
+}
+
+nav {
+  background-color: #59359a !important;
+  margin-bottom: 3rem;
+}
+
+nav ul li a {
+  color: #fff;
+  transition: font-weight 0.2s;
+  margin: 15px;
+}
+
+nav ul li a:hover {
+  font-weight: bold;
+  color: #C8A2C8;
+}
+
+table {
+  margin-top: 50px;
+}
+
+.btn {
+  background-color: #59359a !important;
+  border-color: #59359a !important;
+  color: #ffffff !important;
+}
+
+.btn:hover {
+  background-color: #C8A2C8 !important;
+  border-color: #C8A2C8 !important;
+  color: #59359a !important;
+  font-weight: bold !important;
+}

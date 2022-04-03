@@ -1,13 +1,18 @@
 //------------------------------------------------------------------------------------------------------------------------//
 
 const Product = require("../model/product");
+const {
+    search
+} = require("./users");
 
 exports.getIndex = (req, res) => {
     res.render("new");
 }
 
 exports.getSearch = (req, res) => {
-    res.render("search");
+    res.render("search", {
+        product: undefined
+    });
 }
 
 exports.getIndexSlash = (req, res) => {
@@ -60,18 +65,60 @@ exports.saveProduct = (req, res) => {
 
 //------------------------------------------------------------------------------------------------------------------------//
 
-//Filtre pour un item//
+/*exports.findOneProduct = (req, res) => {
 
-exports.FindOneProduct = (req, res) => {
+    const code = req.query.search;
 
-    let searchQuery = {_id : req.params.id};
-    Product.findById(searchQuery)
-    .then(product => {
-        res.send(product);
-    })
-    .catch(error =>{
-        res.redirect("/")
-    });
+    Product.findOne({code})
+
+        .then((product) => {
+
+            if (product) {
+                console.log(product)
+
+                res.render("search", {product})
+
+            } else {
+                req.flash("error_msg", "Can't find any product matching your query. Please try again !")
+                res.redirect('/product/search'); 
+            }
+
+        }).catch(
+            error => {
+                    req.flash("error_msg", "Can't find any product matching your query. Please try again !")
+                    res.redirect('/product/search');
+                    console.log(error);
+                }
+        );
+}*/
+
+exports.findOneProduct = (req, res) => {
+
+    const code = req.query.search;
+
+    Product.find({
+            code
+        })
+
+        .then((product) => {
+
+            if (product.length !== 0) {
+                res.render("search", {
+                    product
+                })
+
+            } else {
+                req.flash("error_msg", "Can't find any product matching your query. Please try again !")
+                res.redirect('/product/search');
+            }
+
+        }).catch(
+            error => {
+                req.flash("error_msg", "Can't find any product matching your query. Please try again !")
+                res.redirect('/product/search');
+                console.log(error);
+            }
+        );
 }
 
 //------------------------------------------------------------------------------------------------------------------------//
@@ -82,11 +129,12 @@ exports.editProduct = (req, res) => {
     const searchById = {
         _id: req.params.id
     };
-    Product.findById(searchById).then(product => {
-        res.render("edit", {
-            product: product
-        })
-    }).catch();
+    Product.findById(searchById)
+        .then(product => {
+            res.render("edit", {
+                product: product
+            })
+        }).catch();
 }
 
 exports.update = (req, rep) => {

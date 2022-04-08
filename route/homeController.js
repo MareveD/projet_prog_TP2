@@ -1,8 +1,6 @@
-//------------------------------------------------------------------------------------------------------------------------//
-
 const Product = require("../model/product");
 const {
-    search
+search
 } = require("./users");
 
 exports.getIndex = (req, res) => {
@@ -23,10 +21,6 @@ exports.redirectIndex = (req, res) => {
     res.redirect("/");
 }
 
-//------------------------------------------------------------------------------------------------------------------------//
-
-//Affiche tous les produits dans l'index//
-
 exports.allProducts = (req, res) => {
     Product.find({}).then(product => {
         res.render("index", {
@@ -37,16 +31,11 @@ exports.allProducts = (req, res) => {
     });
 }
 
-//------------------------------------------------------------------------------------------------------------------------//
-
-//Save Products dans la liste dans l'index//
-
 exports.saveProduct = (req, res) => {
     console.log(req.body);
     code = req.body.code;
     description = req.body.description;
     prix = req.body.prix;
-
     const newProduct = new Product({
         code: code,
         description: description,
@@ -63,55 +52,20 @@ exports.saveProduct = (req, res) => {
         });
 }
 
-//------------------------------------------------------------------------------------------------------------------------//
-
-/*exports.findOneProduct = (req, res) => {
-
-    const code = req.query.search;
-
-    Product.findOne({code})
-
-        .then((product) => {
-
-            if (product) {
-                console.log(product)
-
-                res.render("search", {product})
-
-            } else {
-                req.flash("error_msg", "Can't find any product matching your query. Please try again !")
-                res.redirect('/product/search'); 
-            }
-
-        }).catch(
-            error => {
-                    req.flash("error_msg", "Can't find any product matching your query. Please try again !")
-                    res.redirect('/product/search');
-                    console.log(error);
-                }
-        );
-}*/
-
 exports.findOneProduct = (req, res) => {
-
     const code = req.query.search;
-
     Product.find({
             code
         })
-
         .then((product) => {
-
             if (product.length !== 0) {
                 res.render("search", {
                     product
                 })
-
             } else {
                 req.flash("error_msg", "Can't find any product matching your query. Please try again !")
                 res.redirect('/product/search');
             }
-
         }).catch(
             error => {
                 req.flash("error_msg", "Can't find any product matching your query. Please try again !")
@@ -120,10 +74,6 @@ exports.findOneProduct = (req, res) => {
             }
         );
 }
-
-//------------------------------------------------------------------------------------------------------------------------//
-
-//Edit and Update un produit//
 
 exports.editProduct = (req, res) => {
     const searchById = {
@@ -157,10 +107,6 @@ exports.update = (req, rep) => {
         });
 }
 
-//------------------------------------------------------------------------------------------------------------------------//
-
-//Delete un produit//
-
 exports.delete = (req, rep) => {
     const searchQuery = {
         _id: req.params.id
@@ -173,5 +119,3 @@ exports.delete = (req, rep) => {
         rep.redirect("/");
     });
 }
-
-//------------------------------------------------------------------------------------------------------------------------//

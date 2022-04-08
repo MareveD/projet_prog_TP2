@@ -1,9 +1,8 @@
-
 <%- include("partials/header") -%>
 
 <main>
 
-  <div class="container">
+    <div class="container">
 
         <%- include("partials/messages") -%>
 
@@ -11,9 +10,8 @@
             <thead>
                 <tr>
                     <th>Code</th>
-                    <th>Id</th>
                     <th>Description</th>
-                    <th>Prix</th>
+                    <th>Price</th>
                     <th>Operations</th>
                 </tr>
             </thead>
@@ -22,9 +20,8 @@
                 <% products.forEach((product)=> { %>
                 <tr>
                     <td><%= product.code %></td>
-                    <td><%= product.id %></td>
                     <td><%= product.description %></td>
-                    <td><%= product.prix %></td>
+                    <td>$ <%= product.prix %></td>
                     <td>
                         <form style="display: inline;" action="/delete/<%=product.id%>?_method=DELETE" method="POST">
                             <button style="cursor: pointer;" type="submit" class="btn btn-danger ml-2">Delete</button>

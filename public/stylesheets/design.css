@@ -37,15 +37,43 @@ table {
   margin-top: 50px;
 }
 
-.btn {
+.btn{
+  transition: font-weight 0.2s !important;
   background-color: #59359a !important;
   border-color: #59359a !important;
   color: #ffffff !important;
 }
 
-.btn:hover {
+.btn:hover{
+  transition: font-weight 0.2s !important;
+  font-weight: bold !important;
   background-color: #C8A2C8 !important;
   border-color: #C8A2C8 !important;
   color: #59359a !important;
+}
+
+.btn-success {
+  background-color: #3A5311 !important;
+  border-color: #3A5311 !important;
+  color: #ffffff !important;
+}
+
+.btn-success:hover {
+  background-color: #98BF64 !important;
+  border-color: #98BF64 !important;
+  color: #3A5311 !important;
+  font-weight: bold !important;
+}
+
+.btn-danger {
+  background-color: #E3242B !important;
+  border-color: #E3242B !important;
+  color: #ffffff !important;
+}
+
+.btn-danger:hover {
+  background-color: #f7c9c9 !important;
+  border-color: #f7c9c9 !important;
+  color: #E3242B !important;
   font-weight: bold !important;
 }

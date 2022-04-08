@@ -5,7 +5,6 @@ const dotenv = require("dotenv");
 const methodOverride = require("method-override");
 const path = require("path");
 const userRoutes = require("./route/users");
-
 const expressSession = require("express-session");
 const cookieParser = require("cookie-parser");
 const connectFlash = require("connect-flash");
@@ -24,7 +23,6 @@ app.use(express.urlencoded({
 
 app.use(express.json());
 app.use(methodOverride("_method"));
-
 app.use(cookieParser("my_secret_code"));
 app.use(expressSession({
     secret: "my_secret_code",
@@ -34,23 +32,20 @@ app.use(expressSession({
     saveUninitialized: false,
     resave: false
 }));
-
 app.use(connectFlash());
 app.use((req, res, next) => {
     res.locals.flashMessages = req.flash();
     next();
 });
-
-app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname, "public")));
-app.set("view engine", "ejs");
-
 app.use(userRoutes);
 
-//app.use("/css", express.static(path.resolve(__dirname, "node_modules/bootstrap/dist/css")));
-//app.use("/js", express.static(path.resolve(__dirname, "node_modules/bootstrap/dist/js")));
-//app.use("/js", express.static(path.resolve(__dirname, "node_modules/jquery/dist")));
-app.get("/", (req, res) => {res.sendFile(path.resolve(__dirname, "views/index.ejs"))});
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
+app.get("/", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "views/index.ejs"))
+});
 
 const port = process.env.PORT;
 app.listen(port, () => {

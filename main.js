@@ -1,5 +1,3 @@
-/////////////////////////////// COPY PASTE DES EXOS MONGOOSE ///////////////////////////////
-
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -7,6 +5,9 @@ const dotenv = require("dotenv");
 const methodOverride = require("method-override");
 const path = require("path");
 const userRoutes = require("./route/users");
+const expressSession = require("express-session");
+const cookieParser = require("cookie-parser");
+const connectFlash = require("connect-flash");
 
 dotenv.config({
     path: "./config.env"
@@ -22,39 +23,29 @@ app.use(express.urlencoded({
 
 app.use(express.json());
 app.use(methodOverride("_method"));
-
-app.set("views", path.join(__dirname, "views"));
-app.set(express.static("public"));
-app.set("view engine", "ejs");
-
-app.use(userRoutes);
-
-///////////////////////////////////////////////////////////////////////////////////
-
-
-/////////////////////////////// SESSIONS ET COOKIES ///////////////////////////////
-
-const expressSession = require("express-session");
-const cookieParser = require("cookie-parser");
-const connectFlash = require("connect-flash");
-
 app.use(cookieParser("my_secret_code"));
 app.use(expressSession({
     secret: "my_secret_code",
     cookie: {
-        maxAge: 0 //serait donc infini
+        maxAge: 40000
     },
     saveUninitialized: false,
     resave: false
 }));
-
 app.use(connectFlash());
 app.use((req, res, next) => {
     res.locals.flashMessages = req.flash();
     next();
 });
+app.use(express.static(path.join(__dirname, "public")));
+app.use(userRoutes);
 
-///////////////////////////////////////////////////////////////////////////////////
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
+app.get("/", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "views/index.ejs"))
+});
 
 const port = process.env.PORT;
 app.listen(port, () => {
